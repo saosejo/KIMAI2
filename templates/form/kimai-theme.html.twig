@@ -1,0 +1,82 @@
+{% extends "@AdminLTE/layout/form-theme.html.twig" %}
+
+{# Adds the help icon, including a link to the documentation #}
+{% block form_label %}
+    {% if form.vars.docu_chapter is defined and form.vars.docu_chapter is not empty %}
+        <a href="{{ form.vars.docu_chapter|docu_link }}" target="_blank"><i class="{{ 'help'|icon }}"></i></a>
+    {% endif %}
+    {{ parent() }}
+{% endblock form_label %}
+
+{% block daterange_widget %}
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="far fa-calendar-alt"></i>
+        </div>
+
+        {% set attr = attr|merge({'data-daterangepickerenable':'on'}) %}
+
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock daterange_widget %}
+
+{% block datetime_widget -%}
+    <div class="input-group">
+        <div class="input-group-addon">
+            <a href="#" onclick="if (!$('#{{ id }}').is(':disabled')) { $('#{{ id }}').val(moment().format('{{ attr['data-format'] }}')).change(); }return false;"><i class="{{ 'calendar'|icon }}"></i></a>
+        </div>
+        {{ block('form_widget_simple') }}
+    </div>
+{%- endblock datetime_widget %}
+
+{% block date_widget -%}
+    <div class="input-group">
+        <div class="input-group-addon">
+            <a href="#" onclick="if (!$('#{{ id }}').is(':disabled')) { $('#{{ id }}').val(moment().format('{{ attr['data-format'] }}')).change(); }return false;"><i class="{{ 'calendar'|icon }}"></i></a>
+        </div>
+        {{ block('form_widget_simple') }}
+    </div>
+{%- endblock date_widget %}
+
+{% block text_widget -%}
+    {% if icon is not empty %}
+    <div class="input-group">
+        <div class="input-group-addon">
+            <i class="{{ icon|icon }}"></i>
+        </div>
+        {{ block('form_widget_simple') }}
+    </div>
+    {% else %}
+        {{ block('form_widget_simple') }}
+    {% endif %}
+{%- endblock text_widget %}
+
+{% block monthpicker_widget -%}
+    <div class="btn-group">
+        <a class="btn btn-default btn-left" href="#" onclick="$('#{{ form.vars.id }}').val('{{ previousMonth|date_short }}').change()" data-toggle="tooltip" data-placement="top" title="{{ previousMonth|month_name(true) }}">
+            <i class="{{ 'left'|icon }}"></i>
+        </a>
+        <a class="btn btn-default" href="#" onclick="return false;">
+            <span id="{{ form.vars.id }}_month_name">{{ month|month_name(true) }}</span>
+        </a>
+        <a class="btn btn-default btn-right" href="#" onclick="$('#{{ form.vars.id }}').val('{{ nextMonth|date_short }}').change()" data-toggle="tooltip" data-placement="top" title="{{ nextMonth|month_name(true) }}">
+            <i class="{{ 'right'|icon }}"></i>
+        </a>
+    </div>
+    {{ block('hidden_widget') }}
+{%- endblock monthpicker_widget %}
+
+{% block weekpicker_widget -%}
+    <div class="btn-group">
+        <a class="btn btn-default btn-left" href="#" onclick="$('#{{ form.vars.id }}').val('{{ previousWeek|date_short }}').change()" data-toggle="tooltip" data-placement="top" title="{{ 'stats.workingTimeWeek'|trans({'%week%': previousWeek|date_format('W')}) }}">
+            <i class="{{ 'left'|icon }}"></i>
+        </a>
+        <a class="btn btn-default" href="#" onclick="return false;">
+            <span id="{{ form.vars.id }}_week_number">{{ 'stats.workingTimeWeek'|trans({'%week%': week|date_format('W')}) }}</span>
+        </a>
+        <a class="btn btn-default btn-right" href="#" onclick="$('#{{ form.vars.id }}').val('{{ nextWeek|date_short }}').change()" data-toggle="tooltip" data-placement="top" title="{{ 'stats.workingTimeWeek'|trans({'%week%': nextWeek|date_format('W')}) }}">
+            <i class="{{ 'right'|icon }}"></i>
+        </a>
+    </div>
+    {{ block('hidden_widget') }}
+{%- endblock weekpicker_widget %}

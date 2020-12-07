@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+{% import "macros/widgets.html.twig" as widgets %}
+{% import "macros/toolbar.html.twig" as toolbar %}
+{% import "macros/datatables.html.twig" as tables %}
+{% import "invoice/actions.html.twig" as actions %}
+
+{% set columns = {
+    'date': {'class': 'alwaysVisible', 'orderBy': false},
+    'user': {'class': 'hidden-xs hidden-sm', 'orderBy': false},
+    'project': {'class': 'hidden-xs hidden-sm', 'orderBy': false},
+    'description': {'class': 'hidden-xs hidden-sm', 'orderBy': false},
+    'unit_price': {'class': 'hidden-xs text-center', 'orderBy': false},
+    'amount': {'class': 'text-center', 'orderBy': false},
+    'duration': {'class': 'hidden-xs text-center', 'orderBy': false},
+    'total_rate': {'class': 'text-right alwaysVisible', 'orderBy': false},
+} %}
+
+{% set tableName = 'invoice' %}
+
+{% block page_title %}{{ 'invoice.title'|trans }}{% endblock %}
+{% block page_actions %}{{ actions.invoices('index') }}{% endblock %}
+
+{% block main_before %}
+    {{ tables.data_table_column_modal(tableName, columns) }}
+{% endblock %}
+
+{% block main %}
+
+    {% if is_granted('create_invoice') %}
+        {% embed '@AdminLTE/Widgets/box-widget.html.twig' %}
+            {% form_theme form '@AdminLTE/layout/form-theme-horizontal.html.twig' %}
+            {% block box_title %}{{ 'invoice.filter'|trans }}{% endblock %}
+            {% block box_before %}{{ form_start(form) }}{% endblock %}
+            {% block box_body %}
+                {{ form_errors(form) }}
+                {% if form.searchTerm is defined %}
+                    {{ form_row(form.searchTerm) }}
+                {% endif %}
+                {{ form_row(form.daterange) }}
+                {{ form_row(form.customer) }}
+                {{ form_row(form.projects) }}
+                {% if form.activities is defined %}
+                    {{ form_row(form.activities) }}
+                {% endif %}
+                {% if form.tags is defined %}
+                    {{ form_row(form.tags) }}
+                {% endif %}
+                {% if form.users is defined %}
+                    {{ form_row(form.users) }}
+                {% endif %}
+                {% if form.exported is defined %}
+                    {{ form_row(form.exported) }}
+                {% endif %}
+                {{ form_row(form.template) }}
+                {{ form_row(form.markAsExported) }}
+            {% endblock %}
+            {% block box_footer%}
+                {% set createAttr = {'class': 'btn btn-success'} %}
+                {% if not is_granted('history_invoice') %}
+                    {% set createAttr = createAttr|merge({'formtarget': '_blank'}) %}
+                {% endif %}
+                {{ form_widget(form.create, {'attr': createAttr}) }}
+                {{ form_widget(form.print) }}
+                {{ form_widget(form.preview) }}
+            {% endblock %}
+            {% block box_after %}{{ form_end(form) }}{% endblock %}
+        {% endembed %}
+    {% else %}
+        {{ widgets.callout('danger', 'http_error_403.suggestion'|trans({}, 'exceptions')) }}
+    {% endif %}
+
+    {% if model is not null %}
+        {% if model.calculator is empty or model.calculator.entries is empty %}
+            {{ widgets.nothing_found() }}
+        {% else %}
+            {% set isDecimal = model.template.decimalDuration|default(false) %}
+            {% set entries = model.calculator.entries %}
+            {% set currency = model.currency %}
+            {{ tables.datatable_header(tableName, columns, query, {}) }}
+            {% for entry in entries %}
+                {% set amount = entry.amount %}
+                {% set duration = entry.duration|duration(isDecimal) %}
+                {% set rate = 0 %}
+                {% if entry.fixedRate is not null %}
+                    {% set rate = entry.fixedRate %}
+                {% elseif entry.hourlyRate is not null %}
+                    {% set rate = entry.hourlyRate %}
+                {% endif %}
+                <tr>
+                    <td class="text-nowrap">{{ entry.begin|date_short }}</td>
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'user') }}">{{ widgets.label_user(entry.user) }}</td>
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'project') }}">
+                        {{ widgets.label_project(entry.project) }}
+                        {% if entry.activity is not null %}
+                        <br>
+                        <small>
+                            {{ widgets.label_activity(entry.activity) }}
+                        </small>
+                        {% endif %}
+                    </td>
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'description') }} timesheet-description">
+                        {% if entry.description is not empty %}
+                            {{ entry.description|desc2html }}
+                        {% endif %}
+                    </td>
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'unit_price') }} text-center">{{ rate|money(currency) }}</td>
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'amount') }} text-center text-nowrap">{{ amount }}</td>
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'duration') }} text-center text-nowrap" data-duration="{{ entry.duration }}">{{ duration }}</td>
+                    <td class="text-right text-nowrap">{{ entry.rate|money(currency) }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th></th>
+                <th class="{{ tables.data_table_column_class(tableName, columns, 'user') }}"></th>
+                <th class="{{ tables.data_table_column_class(tableName, columns, 'project') }}"></th>
+                <th class="{{ tables.data_table_column_class(tableName, columns, 'description') }}"></th>
+                <th class="{{ tables.data_table_column_class(tableName, columns, 'unit_price') }}"></th>
+                <th class="{{ tables.data_table_column_class(tableName, columns, 'amount') }}"></th>
+                <th class="{{ tables.data_table_column_class(tableName, columns, 'duration') }} text-center text-nowrap">{{ model.calculator.timeWorked|duration(isDecimal) }}</th>
+                <th class="text-right text-nowrap">{{ model.calculator.total|money(currency) }}</th>
+            </tr>
+            {{ tables.data_table_footer(entries) }}
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="text/javascript">
+        document.addEventListener('kimai.initialized', function() {
+            KimaiReloadPageWidget.create('kimai.systemConfigUpdate', true);
+        });
+    </script>
+{% endblock %}

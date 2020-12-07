@@ -1,0 +1,71 @@
+/*
+ * This file is part of the Kimai time-tracking app.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+span.label-color,
+span.label-meta,
+span.label-tag,
+span.label-activity,
+span.label-project,
+span.label-customer {
+    display: inline-block;
+    .dot {
+        font-size: 9px;
+        margin-right: 3px;
+        color: $gray-lte;
+    }
+}
+
+table.dataTable {
+    /* action column */
+    .actions {
+        width: 40px;
+    }
+    tr {
+        /* summary row - provided in the users own timesheet table */
+        &.summary td {
+            font-weight: bold;
+            border-bottom: 1px solid #ccc;
+            background-color: #eaeaea;
+        }
+        th.multiCheckbox {
+            width: 15px;
+        }
+        &.overlapping {
+            border-top: 2px dotted red;
+        }
+    }
+    td {
+        /*
+            Make sure that the action buttons do not line-break if another column takes all available space
+            See https://github.com/twbs/bootstrap/issues/9939#issuecomment-37682952
+         */
+        .btn-group {
+            display: flex;
+        }
+        .label {
+            font-size: 85%;
+            font-weight: 500;
+            padding: .3em .6em .3em;
+            line-height: 24px;
+        }
+        span.label-activity,
+        span.label-project,
+        span.label-customer {
+            a {
+                color: unset;
+                padding-bottom: 2px;
+                border-bottom: 1px dotted $gray-lte;
+                &:hover {
+                    border-bottom: 1px dotted darken($gray-lte, 20);
+                }
+            }
+        }
+        span.label-invisible {
+            opacity: 0.8;
+        }
+    }
+}

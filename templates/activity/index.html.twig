@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% import "macros/widgets.html.twig" as widgets %}
+{% import "macros/datatables.html.twig" as tables %}
+{% import "macros/toolbar.html.twig" as toolbar %}
+{% import "activity/actions.html.twig" as actions %}
+
+{% set columns = {
+    'name': {'class': 'alwaysVisible'},
+    'project': {'class': 'hidden-xs'},
+    'comment': {'class': 'hidden-xs hidden-sm', 'title': 'label.description'|trans},
+} %}
+{% for field in metaColumns %}
+    {% set columns = columns|merge({
+        ('mf_' ~ field.name): {'title': field.label|trans, 'class': 'hidden-xs hidden-sm', 'orderBy': false}
+    }) %}
+{% endfor %}
+{% set columns = columns|merge({
+    'team': {'class': 'text-center w-min', 'orderBy': false},
+    'visible': {'class': 'text-center hidden w-min'},
+    'actions': {'class': 'actions alwaysVisible'},
+}) %}
+
+{% set tableName = 'activity_admin' %}
+
+{% block page_title %}{{ 'admin_activity.title'|trans }}{% endblock %}
+{% block page_search %}{{ toolbar.dropDownSearch(toolbarForm) }}{% endblock %}
+{% block page_actions %}{{ actions.activities('index') }}{% endblock %}
+
+{% block main_before %}
+    {{ tables.data_table_column_modal(tableName, columns) }}
+{% endblock %}
+
+{% block main %}
+
+    {% if entries.count == 0 %}
+        {{ widgets.nothing_found('kimai.activityUpdate') }}
+    {% else %}
+        {{ tables.datatable_header(tableName, columns, query, {'reload': 'kimai.activityUpdate kimai.activityTeamUpdate'}) }}
+
+        {% for entry in entries %}
+            <tr{% if is_granted('view', entry) %} class="alternative-link open-edit" data-href="{{ path('activity_details', {'id': entry.id}) }}"{% endif %}>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'name') }}">{{ widgets.label_color_dot('activity', true, entry.name, null, entry.color) }}</td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'project') }}">
+                    {# only none-global activities have a project and customer assigned #}
+                    {% if entry.project %}
+                        {{ widgets.label_project(entry.project) }}
+                        {% if entry.project.customer %}
+                            <br>
+                            <small>
+                                {{ widgets.label_customer(entry.project.customer) }}
+                            </small>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'comment') }}">{{ entry.comment|comment2html }}</td>
+                {% for field in metaColumns %}
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'mf_' ~ field.name) }}">
+                        {{ tables.datatable_meta_column(entry, field) }}
+                    </td>
+                {% endfor %}
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'team') }}">{{ widgets.badge_team_access(entry.teams) }}</td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'visible') }}">{{ widgets.label_visible(entry.visible) }}</td>
+                <td class="{{ tables.data_table_column_class(tableName, columns, 'actions') }}">{{ actions.activity(entry, 'index') }}</td>
+            </tr>
+        {% endfor %}
+
+        {{ tables.data_table_footer(entries, 'admin_activity_paginated') }}
+    {% endif %}
+
+{% endblock %}
