@@ -143,12 +143,14 @@
                         momentEnd = moment(endField.value, format);
                         
                         var durationMoment = moment.duration(momentEnd.diff(momentBegin));
+                        console.log(durationMoment);
                         var hours = Math.floor(durationMoment.asHours());
                         if (hours < 10) {
                             hours = '0' + hours;
                         }
+
                         
-                        durationField.value = hours + ':' + ('0' + durationMoment.minutes()).slice(-2);
+                        durationField.value = hours + ':' + ('0' + durationMoment.minutes()).slice(-2) + ':' + durationMoment.seconds();
                     }
 
                     {#
@@ -193,7 +195,7 @@
                             hours = '0' + hours;
                         }
                         
-                        durationField.value = hours + ':' + ('0' + durationMoment.minutes()).slice(-2);
+                        durationField.value = hours + ':' + ('0' + durationMoment.minutes()).slice(-2) + ':' + durationMoment.seconds();
                     }
 
                     {#

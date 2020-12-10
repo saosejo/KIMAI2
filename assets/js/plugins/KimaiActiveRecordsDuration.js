@@ -69,6 +69,7 @@ export default class KimaiActiveRecordsDuration extends KimaiPlugin {
     }
 
     formatDuration(since, format) {
+
         const duration = moment.duration(moment(new Date()).diff(moment(since)));
 
         let hours = parseInt(duration.asHours()).toString();

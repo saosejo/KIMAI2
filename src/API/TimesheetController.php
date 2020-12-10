@@ -345,7 +345,7 @@ class TimesheetController extends BaseApiController
             'include_user' => $this->isGranted('create_other_timesheet'),
             'allow_begin_datetime' => $mode->canUpdateTimesWithAPI(),
             'allow_end_datetime' => $mode->canUpdateTimesWithAPI(),
-            'date_format' => self::DATE_FORMAT,
+            'date_format' => self::DATE_FORMAT_PHP,
         ]);
 
         $form->submit($request->request->all(), false);

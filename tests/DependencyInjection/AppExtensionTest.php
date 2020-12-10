@@ -76,12 +76,12 @@ class AppExtensionTest extends TestCase
             'kimai.plugin_dir' => realpath(__DIR__ . '/../../') . '/var/plugins',
             'kimai.languages' => [
                 'en' => [
-                    'date_time_type' => 'yyyy-MM-dd HH:mm',
+                    'date_time_type' => 'yyyy-MM-dd HH:mm:ss',
                     'date_type' => 'dd. MM. yyyy',
                     'date' => 'A-m-d',
-                    'date_time' => 'm-d H:i',
-                    'duration' => '%%h:%%m h',
-                    'time' => 'H:i',
+                    'date_time' => 'm-d H:i:s',
+                    'duration' => '%%h:%%m:%%s h',
+                    'time' => 'H:i:s',
                     '24_hours' => true,
                 ],
                 'de' => [

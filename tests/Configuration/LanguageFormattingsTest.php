@@ -35,11 +35,11 @@ class LanguageFormattingsTest extends TestCase
                 '24_hours' => true,
             ],
             'en' => [
-                'date_time_type' => 'yyyy-MM-dd HH:mm',
+                'date_time_type' => 'yyyy-MM-dd HH:mm:ss',
                 'date_type' => 'yyyy-MM-dd',
                 'date' => 'Y-m-d',
-                'date_time' => 'm-d H:i',
-                'duration' => '%h:%m h',
+                'date_time' => 'm-d H:i:s',
+                'duration' => '%h:%m:%s h',
                 'time' => 'H:i:s',
                 '24_hours' => false,
             ],
@@ -62,10 +62,10 @@ class LanguageFormattingsTest extends TestCase
                 'duration' => '%h h %m',
             ],
             'es' => [
-                'date_time_type' => 'dd.MM.yyyy HH:mm',
+                'date_time_type' => 'dd.MM.yyyy HH:mm:ss',
                 'date_type' => 'dd.MM.yyyy',
                 'date' => 'd.m.Y',
-                'duration' => '%h:%m h',
+                'duration' => '%h:%m:%s h',
             ],
             'ru' => [
                 'date_time_type' => 'dd.MM.yyyy HH:mm',

@@ -121,8 +121,8 @@ class TimesheetEditForm extends AbstractType
             $builder->add('duration', DurationType::class, [
                 'required' => false,
                 'attr' => [
-                    'placeholder' => '00:00',
-                    'pattern' => '[0-9]{2,3}:[0-9]{2}'
+                    'placeholder' => '00:00:00',
+                    'pattern' => '[0-9]{2,3}:[0-9]{2}:[0-9]{1,2}'
                 ]
             ]);
         }
@@ -180,7 +180,7 @@ class TimesheetEditForm extends AbstractType
             'required' => false,
             'docu_chapter' => 'timesheet.html#duration-format',
             'attr' => [
-                'placeholder' => '00:00',
+                'placeholder' => '00:00:00',
             ]
         ]);
 
