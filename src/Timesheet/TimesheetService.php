@@ -34,6 +34,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use App\Timesheet\UserDateTimeFactory;
 
 final class TimesheetService
 {
@@ -62,13 +63,20 @@ final class TimesheetService
      */
     private $validator;
 
+    /**
+     * @var UserDateTimeFactory
+     */
+    private $dateTime;
+
+
     public function __construct(
         TimesheetConfiguration $configuration,
         TimesheetRepository $repository,
         TrackingModeService $service,
         EventDispatcherInterface $dispatcher,
         AuthorizationCheckerInterface $security,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        UserDateTimeFactory $dateTime
     ) {
         $this->configuration = $configuration;
         $this->repository = $repository;
@@ -76,6 +84,7 @@ final class TimesheetService
         $this->dispatcher = $dispatcher;
         $this->auth = $security;
         $this->validator = $validator;
+        $this->dateTime = $dateTime;
     }
 
     /**
@@ -145,6 +154,7 @@ final class TimesheetService
             throw new AccessDeniedException('You are not allowed to start this timesheet record');
         }
 
+        $timesheet->setBegin($this->dateTime->createDateTime());
         $this->repository->begin();
         try {
             $this->validateTimesheet($timesheet);
