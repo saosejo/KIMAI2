@@ -72,7 +72,7 @@
       </trans-unit>
       <trans-unit id="permissions">
         <source>permissions</source>
-        <target>Permisos del equipo</target>
+        <target>Permisos del projecto</target>
       </trans-unit>
       <trans-unit id="invoice.paid">
         <source>invoice.paid</source>

@@ -24,6 +24,7 @@ export default class KimaiActiveRecords extends KimaiPlugin {
     }
 
     init() {
+      
         const menu = document.querySelector(this.selector);
 
         // the menu can be hidden if user has no permissions to see it
@@ -39,7 +40,7 @@ export default class KimaiActiveRecords extends KimaiPlugin {
 
         const self = this;
         const handle = function() { self.reloadActiveRecords(); };
-
+       
         document.addEventListener('kimai.timesheetUpdate', handle);
         document.addEventListener('kimai.activityUpdate', handle);
         document.addEventListener('kimai.projectUpdate', handle);
@@ -102,10 +103,11 @@ export default class KimaiActiveRecords extends KimaiPlugin {
     }
 
     reloadActiveRecords() {
+               
         const self = this;
         const API= this.getContainer().getPlugin('api');
-
         API.get(this.attributes['api'], {}, function(result) {
+          
             self.setEntries(result);
         });
     }

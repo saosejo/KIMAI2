@@ -1,3 +1,4 @@
+  
 /*
  * This file is part of the Kimai time-tracking app.
  *
@@ -20,6 +21,7 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
     constructor(selector) {
         super();
         this.selector = selector;
+        this.urlTimeSheet ="";
     }
 
     getId() {
@@ -53,6 +55,7 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
     }
 
     openUrlInModal(url, errorHandler) {
+        this.urlTimeSheet =url;
         const self = this;
 
         if (errorHandler === undefined) {
@@ -62,7 +65,6 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
                 }
             };
         }
-
         jQuery.ajax({
             url: url,
             success: function(html) {
@@ -82,7 +84,19 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
         return '#remote_form_modal .modal-content form';
     }
 
+    loadActiveRecords() {
+       
+       const API= this.getContainer().getPlugin('api');
+       
+        API.get('/api/timesheets/active', {}, function(result) {
+
+          
+          $("#stopButton").attr("href", "/api/timesheets/"+result[0].id+"/stop");
+         });
+    }
+
     _openFormInModal(html) {
+        var createTracker = false;
         const self = this;
 
         let formIdentifier = this._getFormIdentifier();
@@ -133,8 +147,25 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
         });
         // -----------------------------------------------------------------------
 
+        if(this.urlTimeSheet.includes("timesheet/create") && !this.urlTimeSheet.includes("team/timesheet"))
+        {
+            createTracker = true;
+            $('.modal-footer').hide();
+            $('.checkbox').hide();
+            
+        }else{
+            createTracker = false;
+            $('.forTrackStart').hide();
+            $('.forTrackStop').hide();  
+            $( ".onlyTrack" ).removeClass( "col-md-3" ).addClass( "col-md-4" );
+        }
+
+
         this.getContainer().getPlugin('toolbar').hide();
-        remoteModal.modal('show');
+         remoteModal.modal({
+                backdrop: false,
+                show: true
+            });
 
         // the new form that was loaded via ajax
         form = jQuery(formIdentifier);
@@ -181,7 +212,19 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
                         if (msg === null || msg === undefined) {
                             msg = 'action.update.success';
                         }
-                        remoteModal.modal('hide');
+                  
+                        if(createTracker){
+                            $(".forTrackStart").addClass("hidden");
+                            $(".forTrackStop").removeClass("hidden");
+                            self.loadActiveRecords();
+                            console.log(createTracker);
+    
+                        }else{
+                            remoteModal.modal('hide');
+                        }
+                      
+                         
+                        
                         alert.success(msg);
                     }
                     return false;

@@ -154,15 +154,15 @@
             </trans-unit>
             <trans-unit id="menu.admin_customer">
                 <source>menu.admin_customer</source>
-                <target>Customers</target>
+                <target>Final Customers</target>
             </trans-unit>
             <trans-unit id="menu.admin_project">
                 <source>menu.admin_project</source>
-                <target>Projects</target>
+                <target>Customers</target>
             </trans-unit>
             <trans-unit id="menu.admin_activity">
                 <source>menu.admin_activity</source>
-                <target>Activities</target>
+                <target>Task</target>
             </trans-unit>
             <trans-unit id="menu.admin_user">
                 <source>menu.admin_user</source>
@@ -170,7 +170,7 @@
             </trans-unit>
             <trans-unit id="menu.admin_team">
                 <source>menu.admin_team</source>
-                <target>Teams</target>
+                <target>Projects</target>
             </trans-unit>
             <trans-unit id="menu.plugin">
                 <source>menu.plugin</source>
@@ -258,11 +258,11 @@
             </trans-unit>
             <trans-unit id="label.activity">
                 <source>label.activity</source>
-                <target>Activity</target>
+                <target>Task</target>
             </trans-unit>
             <trans-unit id="label.project">
                 <source>label.project</source>
-                <target>Project</target>
+                <target>Customer</target>
             </trans-unit>
             <trans-unit id="label.tag">
                 <source>label.tag</source>
@@ -318,7 +318,7 @@
             </trans-unit>
             <trans-unit id="label.customer">
                 <source>label.customer</source>
-                <target>Customer</target>
+                <target>Final customer</target>
             </trans-unit>
             <trans-unit id="label.email">
                 <source>label.email</source>
@@ -326,7 +326,7 @@
             </trans-unit>
             <trans-unit id="label.team">
                 <source>label.team</source>
-                <target>Team</target>
+                <target>Project</target>
             </trans-unit>
             <trans-unit id="label.teamlead">
                 <source>label.teamlead</source>
@@ -406,11 +406,11 @@
             </trans-unit>
             <trans-unit id="label.my_teams">
                 <source>label.my_teams</source>
-                <target>My teams</target>
+                <target>My projects</target>
             </trans-unit>
             <trans-unit id="label.my_team_projects">
                 <source>label.my_team_projects</source>
-                <target>Team projects &amp; budgets</target>
+                <target>Customer projects &amp; budgets</target>
             </trans-unit>
             <trans-unit id="label.progress">
                 <source>label.progress</source>
@@ -510,7 +510,7 @@
             </trans-unit>
             <trans-unit id="profile.teams">
                 <source>profile.teams</source>
-                <target>Teams</target>
+                <target>Projects</target>
             </trans-unit>
             <trans-unit id="profile.preferences">
                 <source>profile.preferences</source>
@@ -575,7 +575,7 @@
             -->
             <trans-unit id="admin_project.title">
                 <source>admin_project.title</source>
-                <target>Projects</target>
+                <target>Customers</target>
             </trans-unit>
             <trans-unit id="admin_project.short_stats">
                 <source>admin_project.short_stats</source>
@@ -598,12 +598,12 @@
             -->
             <trans-unit id="admin_activity.title">
                 <source>admin_activity.title</source>
-                <target>Activities</target>
+                <target>Task</target>
             </trans-unit>
             <trans-unit id="admin_activity.short_stats">
                 <source>admin_activity.short_stats</source>
                 <target>
-                    Currently the activity %activity% in the project %project% for the customer %customer%
+                    Currently the task %activity% in the customer %project% for the final customer %customer%
                     has %records% time-records, which sum up to a total of %duration%.
                 </target>
             </trans-unit>
@@ -670,7 +670,7 @@
             <trans-unit id="admin_customer.short_stats">
                 <source>admin_customer.short_stats</source>
                 <target>
-                    Currently the customer %customer% has %project% projects with %activity% activities, which sum up
+                    Currently the project %customer% has %project% clients with %activity% tasks, which sum up
                     in %records% time-records to a total of %duration%.
                 </target>
             </trans-unit>
@@ -846,7 +846,7 @@
             </trans-unit>
             <trans-unit id="stats.activityTotal">
                 <source>stats.activityTotal</source>
-                <target>Activities</target>
+                <target>Task</target>
             </trans-unit>
             <trans-unit id="stats.projectTotal">
                 <source>stats.projectTotal</source>
@@ -854,7 +854,7 @@
             </trans-unit>
             <trans-unit id="stats.customerTotal">
                 <source>stats.customerTotal</source>
-                <target>Customers</target>
+                <target>Final customers</target>
             </trans-unit>
             <trans-unit id="stats.percentUsed">
                 <source>stats.percentUsed</source>

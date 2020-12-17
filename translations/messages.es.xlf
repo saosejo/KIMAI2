@@ -121,19 +121,19 @@
       </trans-unit>
       <trans-unit id="menu.admin_timesheet">
         <source>menu.admin_timesheet</source>
-        <target>Partes de horas</target>
+        <target>Registro de tiempos</target>
       </trans-unit>
       <trans-unit id="menu.admin_customer">
         <source>menu.admin_customer</source>
-        <target>Clientes</target>
+        <target>Cliente Final</target>
       </trans-unit>
       <trans-unit id="menu.admin_project">
         <source>menu.admin_project</source>
-        <target>Proyectos</target>
+        <target>Cliente</target>
       </trans-unit>
       <trans-unit id="menu.admin_activity">
         <source>menu.admin_activity</source>
-        <target>Actividades</target>
+        <target>Tareas</target>
       </trans-unit>
       <trans-unit id="menu.admin_user">
         <source>menu.admin_user</source>
@@ -141,7 +141,7 @@
       </trans-unit>
       <trans-unit id="menu.admin_team">
         <source>menu.admin_team</source>
-        <target>Equipos</target>
+        <target>Proyectos</target> 
       </trans-unit>
       <trans-unit id="menu.plugin">
         <source>menu.plugin</source>
@@ -223,11 +223,11 @@
       </trans-unit>
       <trans-unit id="label.activity">
         <source>label.activity</source>
-        <target>Actividad</target>
+        <target>Tarea</target>
       </trans-unit>
       <trans-unit id="label.project">
         <source>label.project</source>
-        <target>Proyecto</target>
+        <target>Cliente</target>
       </trans-unit>
       <trans-unit id="label.tag">
         <source>label.tag</source>
@@ -263,7 +263,7 @@
       </trans-unit>
       <trans-unit id="label.customer">
         <source>label.customer</source>
-        <target>Cliente</target>
+        <target>Cliente Final</target>
       </trans-unit>
       <trans-unit id="label.email">
         <source>label.email</source>
@@ -271,7 +271,7 @@
       </trans-unit>
       <trans-unit id="label.team">
         <source>label.team</source>
-        <target>Equipo</target>
+        <target>Proyecto</target>
       </trans-unit>
       <trans-unit id="label.teamlead">
         <source>label.teamlead</source>
@@ -340,11 +340,11 @@
       </trans-unit>
       <trans-unit id="label.my_teams">
         <source>label.my_teams</source>
-        <target>Mis equipos</target>
+        <target>Mis Proyectos</target>
       </trans-unit>
       <trans-unit id="label.my_team_projects">
         <source>label.my_team_projects</source>
-        <target>Proyectos de equipo &amp; presupuestos</target>
+        <target>Proyectos de cliente &amp; presupuestos</target>
       </trans-unit>
       <trans-unit id="label.progress">
         <source>label.progress</source>
@@ -426,7 +426,7 @@
       </trans-unit>
       <trans-unit id="profile.teams">
         <source>profile.teams</source>
-        <target>Equipos</target>
+        <target>Proyectos</target>
       </trans-unit>
       <trans-unit id="profile.preferences">
         <source>profile.preferences</source>
@@ -473,14 +473,14 @@
             -->
       <trans-unit id="admin_timesheet.title">
         <source>admin_timesheet.title</source>
-        <target>Partes de horas</target>
+        <target>Registro de tiempos</target>
       </trans-unit>
       <!--
               Admin: Projects
             -->
       <trans-unit id="admin_project.title">
         <source>admin_project.title</source>
-        <target>Proyectos</target>
+        <target>Clientes</target>
       </trans-unit>
       <trans-unit id="admin_project.short_stats">
         <source>admin_project.short_stats</source>
@@ -494,12 +494,12 @@
             -->
       <trans-unit id="admin_activity.title">
         <source>admin_activity.title</source>
-        <target>Actividades</target>
+        <target>Tareas</target>
       </trans-unit>
       <trans-unit id="admin_activity.short_stats">
         <source>admin_activity.short_stats</source>
         <target>
-                    Actualmente la actividad %activity% en el proyecto %project% para el cliente %customer%
+                    Actualmente la tarea %activity% en el cliente %project% para el cliente final %customer%
                     tiene %records% registros, para un total de %duration%.
                 </target>
       </trans-unit>
@@ -508,7 +508,7 @@
             -->
       <trans-unit id="admin_customer.title">
         <source>admin_customer.title</source>
-        <target>Cliente</target>
+        <target>Cliente final</target>
       </trans-unit>
       <trans-unit id="label.number">
         <source>label.number</source>
@@ -560,7 +560,7 @@
       </trans-unit>
       <trans-unit id="admin_customer.short_stats">
         <source>admin_customer.short_stats</source>
-        <target>Actualmente el cliente %customer% tiene %project% proyectos con %activity% actividades, para un total de %records% registros que suman %duration%.</target>
+        <target>Actualmente el cliente final %customer% tiene %project% cliente con %activity% tareas, para un total de %records% registros que suman %duration%.</target>
       </trans-unit>
       <!--
               Admin: User
@@ -1014,7 +1014,7 @@
       </trans-unit>
       <trans-unit id="menu.reporting">
         <source>menu.reporting</source>
-        <target>Reportando</target>
+        <target>Reportes</target>
       </trans-unit>
       <trans-unit id="label.vat_id">
         <source>label.vat_id</source>

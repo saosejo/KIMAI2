@@ -14,7 +14,7 @@
     {% embed formEditTemplate with formOptions %}
         {% set length = 6 %}
         {% if form.begin is defined and form.end is defined and form.duration is defined %}
-            {% set length = 5 %}
+            {% set length = 4 %}
         {% elseif form.begin is defined and form.end is defined and form.duration is not defined %}
             {% set length = 6 %}
         {% elseif form.begin is defined and form.end is not defined and form.duration is defined %}
@@ -31,31 +31,57 @@
                     </div>
                 {% endif %}
                 {% if form.end is defined %}
-                    <div class="col-md-{{ length }}">
+                    <div class="col-md-{{ length }} ">
                         {{ form_row(form.end) }}
                     </div>
                 {% endif %}
                 {% if form.duration is defined %}
-                    <div class="col-md-2">
+                    <div class="col-md-4" >
                         {{ form_row(form.duration) }}
                     </div>
                 {% endif %}
             </div>
             {% endif %}
+            <div class="row">
             {% if form.customer is defined %}
+                 <div class="col-md-3 onlyTrack">
                 {{ form_row(form.customer) }}
+                  </div>
             {% endif %}
             {% if form.project is defined %}
+                 <div class="col-md-3 onlyTrack">
                 {{ form_row(form.project) }}
+                 </div>
             {% endif %}
             {% if form.activity is defined %}
+                 <div class="col-md-3 onlyTrack">
                 {{ form_row(form.activity) }}
+                 </div>
             {% endif %}
+               <div class="col-md-3 forTrackStart">
+                  <div class="form-group ">
+                  <label style="width: 100%; margin-top: 8%;"></label>
+                  <button type="submit" class="btn btn-success pull-left modal-form-save  btn-block " data-loading-text="{{ 'action.save'|trans }}..." id="{{ block('modal_id') }}_save"><i class="{{ 'start'|icon }}  "></i> </button>
+                </div>
+              </div>
+               <div class="col-md-3 forTrackStop hidden" data-api="{{ path('active_timesheet') }}">
+                  <div class="form-group" >
+                  <label style="width: 100%; margin-top: 8%;"></label>
+                       <a href="{{ path('stop_timesheet', {'id' : entry.id}) }}" id="stopButton" class="api-link btn btn-danger btn-block" data-event="kimai.timesheetStop kimai.timesheetUpdate" data-method="PATCH" data-msg-error="timesheet.stop.error" data-msg-success="timesheet.stop.success">
+                       <i class="{{ 'stop-small'|icon }} "></i></a>
+                </div>
+              </div>
+               </div>
             {% if form.description is defined %}
+                <div class="hidden">
                 {{ form_row(form.description) }}
+
+               </div>
             {% endif %}
             {% if form.tags is defined %}
+                 <div class="hidden">
                 {{ form_row(form.tags) }}
+                 </div>
             {% endif %}
             {% if form.user is defined %}
                 {{ form_row(form.user) }}
@@ -79,7 +105,7 @@
                 </div>
             {% endif %}
             {% if form.fixedRate is defined and form.hourlyRate is defined %}
-            <div class="row">
+            <div class="row hidden">
                 <div class="col-md-6">
                     {{ form_row(form.fixedRate) }}
                 </div>
@@ -88,12 +114,25 @@
                 </div>
             </div>
             {% endif %}
-            {{ form_widget(form) }}
+          {{ form_widget(form) }}
         {% endblock %}
+
+
+
+            {% block form_before %}
+                <script type="text/javascript">
+
+                    $("#stopButton").click(function(){
+                          $(".forTrackStop").addClass("hidden");
+                          $(".forTrackStart").removeClass("hidden");
+                    });
+                     </script>
+             {% endblock %}
         {% block form_after %}
             {% if form.begin is defined and form.end is defined and form.duration is defined %}
                 {% set blockPrefix = form.vars.id %}
                 <script type="text/javascript">
+                
                     $('body').on('blur change', '#{{ blockPrefix }}_begin', function(ev) {
                         changedBegin($(this).val());
                     });

@@ -76,7 +76,7 @@
             </trans-unit>
             <trans-unit id="permissions">
                 <source>permissions</source>
-                <target>Team permissions</target>
+                <target>Project permissions</target>
             </trans-unit>
             <trans-unit id="details">
                 <source>details</source>

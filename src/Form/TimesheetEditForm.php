@@ -149,11 +149,11 @@ class TimesheetEditForm extends AbstractType
         }
 
         if ($customerCount < 2) {
-            return false;
+            return true;
         }
 
         if (!$options['customer']) {
-            return false;
+            return true;
         }
 
         return true;
@@ -161,6 +161,7 @@ class TimesheetEditForm extends AbstractType
 
     protected function addBegin(FormBuilderInterface $builder, array $dateTimeOptions)
     {
+        
         $builder->add('begin', DateTimePickerType::class, array_merge($dateTimeOptions, [
             'label' => 'label.begin'
         ]));
