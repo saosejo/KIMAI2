@@ -125,6 +125,10 @@
                     $("#stopButton").click(function(){
                           $(".forTrackStop").addClass("hidden");
                           $(".forTrackStart").removeClass("hidden");
+                         
+                            setTimeout(function() { 
+                               $('#form_modal_save').click();
+                            }, 100);
                     });
                      </script>
              {% endblock %}
@@ -145,6 +149,7 @@
                         changedDuration($(this).val());
                     });
                     
+
                     {#
                         Ruleset: 
                         - invalid begin => skip

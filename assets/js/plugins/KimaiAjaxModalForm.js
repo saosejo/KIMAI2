@@ -52,6 +52,9 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
         this._addClickHandler(this.selector, function(href) {
             self.openUrlInModal(href);
         });
+
+       
+
     }
 
     openUrlInModal(url, errorHandler) {
@@ -94,6 +97,8 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
           $("#stopButton").attr("href", "/api/timesheets/"+result[0].id+"/stop");
          });
     }
+    
+
 
     _openFormInModal(html) {
         var createTracker = false;
