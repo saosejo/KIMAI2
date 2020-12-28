@@ -10,7 +10,7 @@ php.ini
 
 /bin/*
 !bin/console
-/config/packages/local.yaml
+
 /config/packages/*-local.yaml
 /config/packages/*/local.yaml
 /config/packages/*/*-local.yaml

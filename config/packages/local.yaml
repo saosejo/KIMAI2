@@ -1,0 +1,4 @@
+framework:
+    session:
+        gc_maxlifetime: 28800
+        cookie_lifetime: ~
