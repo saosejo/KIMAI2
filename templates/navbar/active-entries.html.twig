@@ -15,7 +15,7 @@
             <ul class="menu">
                 {% for entry in entries %}
                 <li>
-                    <a href="{{ path('stop_timesheet', {'id' : entry.id}) }}" class="api-link" data-event="kimai.timesheetStop kimai.timesheetUpdate" data-method="PATCH" data-msg-error="timesheet.stop.error" data-msg-success="timesheet.stop.success">
+                    <a id="stopTimer" onclick="functionLoad()" href="{{ path('stop_timesheet', {'id' : entry.id}) }}" class="api-link" data-event="kimai.timesheetStop kimai.timesheetUpdate" data-method="PATCH" data-msg-error="timesheet.stop.error" data-msg-success="timesheet.stop.success">
                         <div class="pull-left">
                             <i class="{{ 'stop-small'|icon }} fa-2x"></i>
                         </div>
@@ -38,8 +38,22 @@
 </li>
 {% if is_granted('create_own_timesheet') %}
 <li class="messages-menu-empty" style="{% if entries is not empty %}display:none{% endif %}">
-    <a href="{{ path('timesheet_create') }}" class="ddt-large modal-ajax-form">
+    <a href="{{ path('timesheet_create') }}" id="modalCreate" class="ddt-large modal-ajax-form">
         <i class="{{ 'start'|icon }} fa-2x"></i>
     </a>
 </li>
 {% endif %}
+
+ 
+
+                {% block form_after %}
+                <script type="text/javascript">           
+
+                   function functionLoad(){
+                     setTimeout(function() {                            
+                            $('.menu li').children()[1].click();
+                         }, 100);
+                    }
+
+                </script>
+             {% endblock %}

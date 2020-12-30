@@ -31,6 +31,7 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
     init() {
         const self = this;
 
+      
         this.modal = jQuery('#remote_form_modal');
         this.modal.on('hide.bs.modal', function () {
             self.getContainer().getPlugin('event').trigger('modal-hide');
@@ -222,7 +223,6 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
                             $(".forTrackStart").addClass("hidden");
                             $(".forTrackStop").removeClass("hidden");
                             self.loadActiveRecords();
-                            console.log(createTracker);
     
                         }else{
                             remoteModal.modal('hide');

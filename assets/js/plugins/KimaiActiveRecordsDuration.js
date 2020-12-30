@@ -27,7 +27,7 @@ export default class KimaiActiveRecordsDuration extends KimaiPlugin {
         this.updateRecords();
         const self = this;
         const handle = function() { self.updateRecords(); };
-        this._updatesHandler = setInterval(handle, 10000);
+        this._updatesHandler = setInterval(handle, 1000);
         // this will probably not work as expected, as other event-handler might need longer to update the DOM
         document.addEventListener('kimai.timesheetUpdate', handle);
     }
