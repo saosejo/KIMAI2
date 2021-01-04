@@ -58,13 +58,20 @@
                 {{ form_row(form.activity) }}
                  </div>
             {% endif %}
-               <div class="col-xs-3 forTrackStart">
+
+            {% if form.description is defined %}
+                <div class="col-xs-2">
+                {{ form_row(form.description) }}
+
+               </div>
+            {% endif %}
+               <div class="col-xs-1 forTrackStart">
                   <div class="form-group ">
                   <label class="lbDefault"></label>
                   <button type="submit" class="btn btn-success pull-left modal-form-save  btn-block " data-loading-text="{{ 'action.save'|trans }}..." id="{{ block('modal_id') }}_save"><i class="{{ 'start'|icon }}  "></i> </button>
                 </div>
               </div>
-               <div class="col-xs-3 forTrackStop hidden" data-api="{{ path('active_timesheet') }}">
+               <div class="col-xs-1 forTrackStop hidden" data-api="{{ path('active_timesheet') }}">
                   <div class="form-group" >
                   <label style="width: 100%; margin-top: 8%;"></label>
                        <a href="{{ path('stop_timesheet', {'id' : entry.id}) }}" id="stopButton" class="api-link btn btn-danger btn-block" data-event="kimai.timesheetStop kimai.timesheetUpdate" data-method="PATCH" data-msg-error="timesheet.stop.error" data-msg-success="timesheet.stop.success">
@@ -72,12 +79,7 @@
                 </div>
               </div>
                </div>
-            {% if form.description is defined %}
-                <div class="hidden">
-                {{ form_row(form.description) }}
-
-               </div>
-            {% endif %}
+            
             {% if form.tags is defined %}
                  <div class="hidden">
                 {{ form_row(form.tags) }}
