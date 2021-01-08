@@ -688,11 +688,11 @@
             </trans-unit>
             <trans-unit id="label.title">
                 <source>label.title</source>
-                <target>Title</target>
+                <target>Role Level</target>
             </trans-unit>
             <trans-unit id="label.avatar">
                 <source>label.avatar</source>
-                <target>Profile image</target>
+                <target>Area</target>
             </trans-unit>
             <trans-unit id="label.active">
                 <source>label.active</source>
