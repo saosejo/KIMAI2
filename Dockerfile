@@ -38,7 +38,7 @@ RUN apt update && \
 
 FROM tmp_kimai2_base
 
-RUN git clone https://github.com/kevinpapst/kimai2.git /opt/kimai && \
+RUN git clone https://github.com/Andessy/kimai2.git /opt/kimai && \
     sed "s/prod/dev/g" /opt/kimai/.env.dist > /opt/kimai/.env && \
     composer install --working-dir=/opt/kimai --dev --optimize-autoloader && \
     /opt/kimai/bin/console doctrine:database:create && \
