@@ -6,7 +6,7 @@
     <ul class="dropdown-menu"
         data-api="{{ path('active_timesheet') }}"
         data-href="{{ path('stop_timesheet', {'id' : '000'}) }}"
-        data-icon="{{ 'stop-small'|icon }}"
+        data-icon="{{ 'next'|icon }}"
         data-format="{{ get_format_duration() }}">
         <li class="header">
             {{ 'active.entries'|trans }}
@@ -17,7 +17,7 @@
                 <li>
                     <a id="stopTimer" onclick="functionLoad()" href="{{ path('stop_timesheet', {'id' : entry.id}) }}" class="api-link" data-event="kimai.timesheetStop kimai.timesheetUpdate" data-method="PATCH" data-msg-error="timesheet.stop.error" data-msg-success="timesheet.stop.success">
                         <div class="pull-left">
-                            <i class="{{ 'stop-small'|icon }} fa-2x"></i>
+                            <i class="{{ 'next'|icon }} fa-2x"></i>
                         </div>
                         <h4>
                             <span>{{ entry.activity.name }}</span>

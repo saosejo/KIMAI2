@@ -44,12 +44,12 @@
             {% endif %}
             <div class="row">
             {% if form.customer is defined %}
-                 <div class="col-xs-3 onlyTrack">
+                 <div class="col-xs-2 onlyTrack">
                 {{ form_row(form.customer) }}
                   </div>
             {% endif %}
             {% if form.project is defined %}
-                 <div class="col-xs-3 onlyTrack">
+                 <div class="col-xs-2 onlyTrack">
                 {{ form_row(form.project) }}
                  </div>
             {% endif %}
@@ -60,11 +60,18 @@
             {% endif %}
 
             {% if form.description is defined %}
-                <div class="col-xs-2">
+                <div id="description" class="col-xs-2">
                 {{ form_row(form.description) }}
 
                </div>
             {% endif %}
+
+            {% if form.tags is defined %}
+                 <div id="tags" class="col-xs-2 ">
+                {{ form_row(form.tags) }}
+                 </div>
+            {% endif %}
+
                <div class="col-xs-1 forTrackStart">
                   <div class="form-group ">
                   <label class="lbDefault"></label>
@@ -80,11 +87,7 @@
               </div>
                </div>
             
-            {% if form.tags is defined %}
-                 <div class="hidden">
-                {{ form_row(form.tags) }}
-                 </div>
-            {% endif %}
+    
             {% if form.user is defined %}
                 {{ form_row(form.user) }}
             {% endif %}

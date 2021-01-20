@@ -31,14 +31,15 @@
     'activity': {'class': 'hidden-xs hidden-sm'},
     'description': {'class': 'hidden-xs hidden-sm'},
 }) %}
+{% set columns = columns|merge({
+    'tags': {'class': 'hidden-xs hidden-sm', 'orderBy': false},
+}) %}
 {% if canSeeUsername %}
     {% set columns = columns|merge({
         'username': {'class': 'hidden-xs', 'orderBy': false},
     }) %}
 {% endif %}
-{% set columns = columns|merge({
-    'tags': {'class': 'hidden-xs hidden-sm', 'orderBy': false},
-}) %}
+
 {% for field in metaColumns %}
     {% set columns = columns|merge({
         ('mf_' ~ field.name): {'title': field.label|trans, 'class': 'hidden-xs hidden-sm', 'orderBy': false}
@@ -149,19 +150,19 @@
                         {{ entry.description|nl2br }}
                     {% endif %}
                 </td>
-
-                {% if canSeeUsername %}
-                    <td class="{{ tables.data_table_column_class(tableName, columns, 'username') }}">
-                        {{ widgets.label_user(entry.user) }}
-                    </td>
-                {% endif %}
-                
                 <td class="{{ tables.data_table_column_class(tableName, columns, 'tags') }}">{{ widgets.tag_list(entry.tags) }}</td>
                 {% for field in metaColumns %}
                     <td class="text-nowrap {{ tables.data_table_column_class(tableName, columns, 'mf_' ~ field.name) }}">
                         {{ tables.datatable_meta_column(entry, field) }}
                     </td>
                 {% endfor %}
+                {% if canSeeUsername %}
+                    <td class="{{ tables.data_table_column_class(tableName, columns, 'username') }}">
+                        {{ widgets.label_user(entry.user) }}
+                    </td>
+                {% endif %}
+                
+           
                 <td class="actions">
                     {{ block('row_action') }}
                 </td>

@@ -160,6 +160,12 @@ export default class KimaiAjaxModalForm extends KimaiReducedClickHandler {
             $('.checkbox').hide();
             
         }else{
+
+           if(this.urlTimeSheet.includes("timesheet") && this.urlTimeSheet.includes("edit"))
+        {
+              $('#description').removeClass("col-xs-1").addClass("col-xs-6");
+                $('#tags').removeClass("col-xs-1").addClass("col-xs-6");
+        }
             createTracker = false;
             $('.forTrackStart').hide();
             $('.forTrackStop').hide();  
