@@ -914,7 +914,7 @@
             </trans-unit>
             <trans-unit id="label.mark_as_exported">
                 <source>label.mark_as_exported</source>
-                <target>Mark as exported</target>
+                <target>Mark as approved</target>
             </trans-unit>
             <trans-unit id="label.template">
                 <source>label.template</source>
@@ -1026,7 +1026,7 @@
             -->
             <trans-unit id="export.title">
                 <source>export.title</source>
-                <target>Export</target>
+                <target>Approve</target>
             </trans-unit>
             <trans-unit id="export.subtitle">
                 <source>export.subtitle</source>
@@ -1098,7 +1098,7 @@
             </trans-unit>
             <trans-unit id="label.exported">
                 <source>label.exported</source>
-                <target>Exported</target>
+                <target>Approved</target>
             </trans-unit>
             <trans-unit id="entryState.exported">
                 <source>entryState.exported</source>

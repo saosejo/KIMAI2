@@ -765,7 +765,7 @@
       </trans-unit>
       <trans-unit id="label.mark_as_exported">
         <source>label.mark_as_exported</source>
-        <target>Marcar como exportado</target>
+        <target>Marcar como aprobado</target>
       </trans-unit>
       <trans-unit id="label.template">
         <source>label.template</source>
@@ -852,7 +852,7 @@
             -->
       <trans-unit id="export.title">
         <source>export.title</source>
-        <target>Exportar</target>
+        <target>Aprobar</target>
       </trans-unit>
       <trans-unit id="export.subtitle">
         <source>export.subtitle</source>
@@ -922,7 +922,7 @@
       </trans-unit>
       <trans-unit id="label.exported">
         <source>label.exported</source>
-        <target>Exportado</target>
+        <target>Aprobado</target>
       </trans-unit>
       <trans-unit id="entryState.exported">
         <source>entryState.exported</source>
